@@ -7,8 +7,12 @@ import type {
 import { parseGameFromCaption } from "./parse-game";
 
 const INSTAGRAM_API = "https://graph.instagram.com/v21.0";
-const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN!;
-const USER_ID = process.env.INSTAGRAM_USER_ID!;
+const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
+const USER_ID = process.env.INSTAGRAM_USER_ID;
+
+function isDemoMode(): boolean {
+  return !ACCESS_TOKEN || !USER_ID || ACCESS_TOKEN.startsWith("<");
+}
 
 function parseMedia(media: InstagramMedia): ParsedPhoto {
   return {
@@ -25,6 +29,11 @@ function parseMedia(media: InstagramMedia): ParsedPhoto {
 export async function getInstagramMedia(
   limit = 50
 ): Promise<ParsedPhoto[]> {
+  if (isDemoMode()) {
+    const { getDemoPhotos } = await import("./demo-data");
+    return getDemoPhotos(limit);
+  }
+
   const fields =
     "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
 
@@ -57,6 +66,11 @@ export async function getInstagramMedia(
 export async function getInstagramMediaById(
   id: string
 ): Promise<ParsedPhoto | null> {
+  if (isDemoMode()) {
+    const { getDemoPhotoById } = await import("./demo-data");
+    return getDemoPhotoById(id);
+  }
+
   const fields =
     "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
 
