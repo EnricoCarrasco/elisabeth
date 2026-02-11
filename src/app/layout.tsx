@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: `${SITE_NAME} — Virtual Photographer`,
     description: SITE_DESCRIPTION,
