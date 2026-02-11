@@ -24,7 +24,7 @@ export function CtaSection({ bgImage }: { bgImage?: string }) {
             Explore the Gallery
           </h2>
           <Link href="/gallery">
-            <MagneticButton className="inline-flex items-center gap-3 px-8 py-4 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors duration-300 rounded-none text-sm tracking-[0.1em] uppercase font-medium cursor-pointer">
+            <MagneticButton className="inline-flex items-center gap-3 px-10 py-5 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors duration-300 rounded-none text-sm tracking-[0.1em] uppercase font-medium cursor-pointer">
               View All Work
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

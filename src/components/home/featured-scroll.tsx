@@ -5,8 +5,9 @@ import Link from "next/link";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
-import { FadeIn } from "@/components/ui/fade-in";
+import { AnimatedText } from "@/components/ui/animated-text";
 import { ANIMATION_EASE } from "@/lib/constants";
+
 import type { ParsedPhoto } from "@/types/instagram";
 
 export function FeaturedScroll({ photos }: { photos: ParsedPhoto[] }) {
@@ -15,15 +16,32 @@ export function FeaturedScroll({ photos }: { photos: ParsedPhoto[] }) {
 
   return (
     <section ref={ref} className="section-gap overflow-hidden">
-      <div className="page-padding content-max mb-10">
-        <FadeIn direction="up">
-          <div className="flex items-center gap-6">
-            <h2 className="text-label text-text-secondary whitespace-nowrap">
-              Latest Work
-            </h2>
-            <div className="h-px flex-1 bg-border" />
-          </div>
-        </FadeIn>
+      <div className="page-padding content-max mb-16">
+        <div className="flex flex-col items-center text-center gap-4">
+          <motion.div
+            className="flex items-center gap-4 mb-2"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+            transition={{ duration: 0.8, ease: ANIMATION_EASE }}
+          >
+            <span className="block h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-accent" />
+            <span className="text-label text-accent">Selected Captures</span>
+            <span className="block h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-accent" />
+          </motion.div>
+          <AnimatedText
+            text="Latest Work"
+            as="h2"
+            splitBy="char"
+            staggerDelay={0.04}
+            className="font-clash text-display-title text-text-primary"
+          />
+          <motion.div
+            className="h-0.5 w-16 bg-accent rounded-full mt-2"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+            transition={{ duration: 0.6, ease: ANIMATION_EASE, delay: 0.5 }}
+          />
+        </div>
       </div>
 
       <div className="pl-[clamp(1.5rem,5vw,6rem)]">
